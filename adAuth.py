@@ -51,6 +51,10 @@ def hello():
 @app.route('/login')
 @requires_auth
 def login():
+    username = request.args.get('username', '')
+    for user in users:
+        if user['username'] == username:
+            return jsonify(user)
     return 'OK'
 
 @app.route('/user/<user_id>')
