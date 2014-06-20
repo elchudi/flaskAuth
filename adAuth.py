@@ -6,9 +6,9 @@ from flask import jsonify
 app = Flask(__name__)
 
 users = [
-    {'id':'1', 'username':'juanle', 'password':'123456', 'platform':'Android', 'quality':'High', 'accessibility':'1'},
-    {'id':'2', 'username':'user2', 'password':'123456', 'platform':'iOS', 'quality':'Low', 'accessibility':'1'},
-    {'id':'3', 'username':'user3', 'password':'123456', 'platform':'iOS', 'quality':'Low', 'accessibility':'0'},
+    {'id':'1', 'username':'juanle', 'password':'123456', 'platform':'Android', 'quality':'High', 'accessibility':'1', 'recommender':'auto'},
+    {'id':'2', 'username':'user2', 'password':'123456', 'platform':'iOS', 'quality':'Low', 'accessibility':'1', 'recommender':'random'},
+    {'id':'3', 'username':'user3', 'password':'123456', 'platform':'iOS', 'quality':'Low', 'accessibility':'0', 'recommender':'random'},
 ]
 
 def check_auth(username, password):
@@ -71,9 +71,11 @@ def update(user_id):
             platform = request.args.get('platform', '')
             accesibility = request.args.get('accesibility', '')
             quality = request.args.get('quality', '')
+            recommender = request.args.get('recommender', '')
             user['platform'] = platform
             user['accesibility'] = accesibility
             user['quality'] = quality
+            user['recommender'] = recommender
             return jsonify(user)
     return 'Not Found'
 
